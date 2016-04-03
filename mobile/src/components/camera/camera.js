@@ -29,7 +29,10 @@ module.exports = React.createClass({
 
   takePicture: function(){
     this.camera.capture()
-      .then((data) => console.log(data))
+      .then( (data) => {
+        console.log( "image data:", data );
+        this.props.navigator.replace( {name: 'activity'} );
+      })
       .catch(err => console.error(err))
   }
 

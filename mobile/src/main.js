@@ -1,6 +1,6 @@
 var React = require('react-native');
 var Map = require('./components/map/map');
-var Activities = require('./components/activities/activities');
+var Activity = require('./components/activities/activity');
 var Camera = require('./components/camera/camera');
 
 var {
@@ -9,7 +9,7 @@ var {
 
 var Routes = {
   map: Map,
-  activities: Activities,
+  activity: Activity,
   camera: Camera
 };
 
