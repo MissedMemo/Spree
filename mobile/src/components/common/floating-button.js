@@ -1,16 +1,17 @@
-var React = require('react-native');
+/**********************************
+   NOTE OUR USE OF ES6 SYNTAX !!!
+***********************************/
 
-var {
+import React, {
   Component,
   StyleSheet,
   TouchableOpacity,
   View,
   Text
-} = React;
+} from 'react-native';
 
 
-// Example of ES6 component syntax (babel required for standard export/import syntax)
-module.exports = class FloatingButton extends Component {
+export default class FloatingButton extends Component {
 
   render () {
 

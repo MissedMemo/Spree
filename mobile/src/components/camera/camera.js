@@ -1,4 +1,5 @@
 var React = require('react-native');
+import Camera from 'react-native-camera';
 
 var  {
   Component,
@@ -8,8 +9,6 @@ var  {
   TextInput,
   Dimensions
 } = React;
-
-import Camera from 'react-native-camera';
 
 module.exports = React.createClass({
   render: function(){

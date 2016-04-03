@@ -1,5 +1,6 @@
 var React = require('react-native');
-var FloatingButton = require('../common/floating-button');
+import FloatingButton from '../common/floating-button';
+
 
 var {
   StyleSheet,
