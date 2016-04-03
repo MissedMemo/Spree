@@ -2,14 +2,13 @@ var React = require('react-native');
 import Camera from 'react-native-camera';
 
 var  {
-  Component,
   StyleSheet,
   View,
   Text,
-  TextInput,
   Dimensions
 } = React;
 
+// Hold off using ES6 'Component' instantiation pattern for now (lacks auto-binding and mix-ins)
 module.exports = React.createClass({
   render: function(){
     return (
@@ -22,7 +21,7 @@ module.exports = React.createClass({
           }}
           style = {styles.preview}
           aspect = {Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this.takePicture}>Add Photo</Text>
+          <Text style={styles.captureButton} onPress={this.takePicture}>Capture</Text>
         </Camera>
       </View>
     )
@@ -46,7 +45,7 @@ var styles = StyleSheet.create({
     width: Dimensions.get('window').width
   },
 
-  capture: {
+  captureButton: {
     flex: 0,
     backgroundColor: '#fff',
     borderRadius: 5,

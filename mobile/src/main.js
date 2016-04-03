@@ -1,12 +1,11 @@
 var React = require('react-native');
+var Map = require('./components/map/map');
+var Activities = require('./components/activities/activities');
+var Camera = require('./components/camera/camera');
 
 var {
   Navigator,
 } = React;
-
-var Map = require('./components/map/map');
-var Activities = require('./components/activities/activities');
-var Camera = require('./components/camera/camera');
 
 var Routes = {
   map: Map,
@@ -17,7 +16,7 @@ var Routes = {
 
 module.exports = React.createClass({
 
-  // every veiw given access to navigator
+  // every veiw gets access to navigator
   renderScene: function (route, navigator){
     var Component = Routes[ route.name ];
     return <Component route={route} navigator={navigator} />;
@@ -28,9 +27,8 @@ module.exports = React.createClass({
       <Navigator
         initialRoute={ {name: 'map'} }
         renderScene={ this.renderScene }
-        configureScene={ ()=> { return Navigator.SceneConfigs.FloatFromRight; } }
+        configureScene={ ()=> Navigator.SceneConfigs.FloatFromRight }
       /> 
     )
   }
 });
-
