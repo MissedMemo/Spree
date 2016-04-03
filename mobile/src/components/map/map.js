@@ -8,7 +8,8 @@ var {
   Component,
   StyleSheet,
   MapView,
-  TouchableHighlight,
+  TouchableOpacity,
+  Image,
   View,
   Text
 } = React;
@@ -36,15 +37,17 @@ module.exports = React.createClass({
           showsUserLocation={true}
           followUserLocation={true}
         />
-        <View style={ styles.floatingButton } >
-          <Text style={ styles.buttonText } >Add</Text>
-        </View>
+        <TouchableOpacity  onPress={ this.addActivity }>
+          <View style={ styles.floatingButton } >
+            <Text style={ styles.buttonText }>+</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   },
 
 
-  showActivity: function() {
+  addActivity: function() {
     this.props.navigator.push( {name: 'activities'} )
   }
 
@@ -60,22 +63,34 @@ var styles = StyleSheet.create ({
 
   map: {
     flex: 1,
-    marginTop: 30 // offset for wifti, time, battery etc. display
+    marginTop: 24 // offset for wifti, time, battery etc. display
   },
 
   floatingButton: {
     position: 'absolute',
     bottom: 10,
     right: 10,
-    width: 40,
-    height: 40,
+    paddingTop: 3,
+    paddingRight: 10,
+    paddingBottom: 3,
+    paddingLeft: 10,
     borderRadius: 20,
-    backgroundColor: '#6e73ee'
+    backgroundColor: '#6e73ee',
+    shadowColor: 'black',
+    shadowOpacity: 0.9,
+    shadowRadius: 3,
+    shadowOffset: {
+      height: 1,
+      width: 0
+    }
   },
 
   buttonText: {
     flex: 1,
     alignSelf: 'center',
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
   }
 
 });
