@@ -1,20 +1,23 @@
 var React = require('react-native');
 
 var {
+  Component,
   StyleSheet,
   TouchableOpacity,
   View,
   Text
 } = React;
 
-module.exports = React.createClass({
 
-  render: function() {
+// Example of ES6 component syntax (babel required for standard export/import syntax)
+module.exports = class FloatingButton extends Component {
+
+  render () {
 
     return(
       <TouchableOpacity onPress={ this.props.onPress } >
-        <View style={ styles.floatingButton } >
-          <Text style={ styles.buttonText }>
+        <View style={ [styles.floatingButton, {backgroundColor: this.props.bkColor} ] } >
+          <Text style={ [styles.buttonText, {color: this.props.color}] }>
             { this.props.text }
           </Text>
         </View>
@@ -22,7 +25,7 @@ module.exports = React.createClass({
     );
   }
 
-});
+};
 
 
 var styles = StyleSheet.create ({
@@ -36,7 +39,6 @@ var styles = StyleSheet.create ({
     paddingBottom: 3,
     paddingLeft: 10,
     borderRadius: 20,
-    backgroundColor: '#6e73ee',
     shadowColor: 'black',
     shadowOpacity: 0.9,
     shadowRadius: 3,
@@ -49,7 +51,6 @@ var styles = StyleSheet.create ({
   buttonText: {
     flex: 1,
     alignSelf: 'center',
-    color: 'white',
     fontSize: 24,
     fontWeight: 'bold',
   }

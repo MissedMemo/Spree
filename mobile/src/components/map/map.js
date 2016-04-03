@@ -22,23 +22,26 @@ module.exports = React.createClass({
   render: function() {
 
     return(
-
       <View style={ styles.container }>
-      
         <MapView
           style={styles.map}
           annotations={ this.state.mapPins }
           showsUserLocation={true}
           followUserLocation={true}
         />
-        <FloatingButton  onPress={ this.addActivity } text='+' />
+        <FloatingButton
+          onPress={ this.addActivity }
+          text='+'
+          bkColor='#6e73ee'
+          color='white'
+        />
       </View>
     );
   },
 
 
   addActivity: function() {
-    this.props.navigator.push( {name: 'activities'} )
+    this.props.navigator.push( {name: 'camera'} );
   }
 
 })
@@ -55,6 +58,6 @@ var styles = StyleSheet.create ({
   map: {
     flex: 1,
     marginTop: 24 // offset for wifti, time, battery etc. display
-  },
+  }
 
 });
