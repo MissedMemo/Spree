@@ -30,8 +30,15 @@ module.exports = React.createClass({
   takePicture: function(){
     this.camera.capture()
       .then( (data) => {
+
         console.log( "image data:", data );
-        this.props.navigator.replace( {name: 'activity'} );
+
+        // REPLACE existing view, passing flag to new view
+        this.props.navigator.replace({
+          name: 'activity',
+          passProps: { isNew: true }
+        });
+
       })
       .catch(err => console.error(err))
   }
