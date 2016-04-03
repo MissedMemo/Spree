@@ -9,26 +9,48 @@ var {
   Text
 } = React;
 
+
 module.exports = React.createClass({
 
-  getInitialState: function() {
+  getInitialState() {
     return {
-      markers: [], // for pins
+      isFirstLoad: true,
+      mapRegion: undefined,
+      mapPins: [],
     };
   },
 
-  componentWillMount: function(){
-  },
+  render() {
 
-  render: function() {
+    if (this.state.isFirstLoad) {
+
+      var updateMapPins = (region) => {
+        return [{
+          longitude: region.longitude,
+          latitude: region.latitude,
+          title: 'You Are Here',
+        }];
+      };
+
+      var onRegionChangeComplete = (region) => {
+        alert( "region:", region );
+        this.setState({
+          isFirstLoad: false,
+          annotations: updateMapPins(region)
+        });
+      };
+      
+    }
 
     return(
       <View style={ styles.container }>
         <MapView
           style={styles.map}
+          region={this.state.mapRegion}
           annotations={ this.state.mapPins }
           showsUserLocation={true}
           followUserLocation={true}
+          onRegionChangeComplete={ onRegionChangeComplete }
         />
         <FloatingButton
           onPress={ this.addActivity }
@@ -40,8 +62,7 @@ module.exports = React.createClass({
     );
   },
 
-
-  addActivity: function() {
+  addActivity() {
     this.props.navigator.push( {name: 'camera'} );
   }
 
@@ -58,7 +79,7 @@ var styles = StyleSheet.create ({
 
   map: {
     flex: 1,
-    marginTop: 24 // offset for wifti, time, battery etc. display
+    marginTop: 30 // offset for wifi, time, battery etc. display
   }
 
 });
