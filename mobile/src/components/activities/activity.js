@@ -14,21 +14,24 @@ module.exports = React.createClass({
   render: function() {
 
     var isNew = this.props.route.passProps.isNew;
+    var activity = this.props.route.passProps.activity;
 
     return (
 
       <View style={styles.container}>
         <TextInput
-         style={styles.input}
+         style={ [styles.input, isNew ? styles.editable : null ] }
          editable={ isNew }
          placeholder={ 'add a title...' }
+         value = { isNew ? '' : activity.title }
         />
         <TextInput
-          style={ [ styles.input, {height: 90}] } 
+          style={ [ styles.input, {height: 90}, isNew ? styles.editable : null ] } 
           multiline={true}
           maxLength={200}
           editable={ isNew }
           placeholder={'What makes this place so special?'}
+          value = { isNew ? '' : activity.description }
         />
         <View style={styles.buttonWrapper}>
           <Button text={'Save'} onPress={ this.save }/>
@@ -53,12 +56,16 @@ var styles = StyleSheet.create({
 
   input: {
     height: 36,
-    borderColor: 'black',
     margin: 4,
     padding: 8,
+    fontSize: 18
+  },
+
+  editable: {
+    borderColor: 'black',
     borderWidth: 1,
     borderRadius: 3,
-    fontSize: 18
+    alignItems: 'center'
   },
 
   buttonWrapper: {

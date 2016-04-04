@@ -57,10 +57,10 @@ module.exports = React.createClass({
     this.props.navigator.push( {name: 'camera'} );
   },
 
-  showActivity: function() {
+  showActivity: function( activity ) {
     this.props.navigator.push({
       name: 'activity',
-      passProps: { isNew: false }
+      passProps: { isNew: false, activity }
     });
   }
 

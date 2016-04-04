@@ -14,7 +14,7 @@ module.exports = {
       longitude: -122.4046101306659,
       latitude: 37.78151983393839,
       view:
-        <TouchableHighlight onPress={ callback } >
+        <TouchableHighlight onPress={ ()=> callback( {title: 'Coolest XYZ Place', description: 'blah blah blah blah blah blah blah blah'} ) } >
           <Image style={ styles.image }  source={ require('./images/coffee.png') } />
         </TouchableHighlight>
     }
