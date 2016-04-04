@@ -2,23 +2,21 @@ var React = require('react-native');
 
 var {
   StyleSheet,
-  TouchableOpacity,
+  TouchableHighlight,
   Image
 } = React;
 
 
 module.exports = {
 
-  selected: false,
-
   createPin: function( callback ) {
     return {
       longitude: -122.4046101306659,
       latitude: 37.78151983393839,
       view:
-        <TouchableOpacity onPress={ callback } >
+        <TouchableHighlight onPress={ callback } >
           <Image style={ styles.image }  source={ require('./images/coffee.png') } />
-        </TouchableOpacity>
+        </TouchableHighlight>
     }
   }
 
@@ -28,9 +26,8 @@ module.exports = {
 var styles = StyleSheet.create({
 
   image: {
-    width: 20,
-    height: 20,
-    resizeMode: 'cover'
+    width: 24,
+    height: 24
   }
 
 });

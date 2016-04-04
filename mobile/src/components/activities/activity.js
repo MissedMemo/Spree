@@ -11,23 +11,27 @@ var {
 
 module.exports = React.createClass({
 
-  render: function(){
+  render: function() {
+
+    console.log( "props:", this.props.route.passProps );
+
     return (
 
       <View style={styles.container}>
         <TextInput
          style={styles.input}
-         editable={ this.props.route.passProps.isNew }
+         editable={ this.props.route.passProps.IsNew }
          placeholder={ 'add a title...' }
         />
         <TextInput
-          style={ [styles.input, {height: 90}] } 
+          style={ [ styles.input, {height: 90}] } 
           multiline={true}
           maxLength={200}
+          editable={ this.props.route.passProps.IsNew }
           placeholder={'What makes this place so special?'}
         />
         <View style={styles.buttonWrapper}>
-            <Button text={'Save'} onPress={ this.save }/>
+          <Button text={'Save'} onPress={ this.save }/>
         </View>
       </View> 
     )
@@ -47,13 +51,18 @@ var styles = StyleSheet.create({
     alignItems: 'center'
   },
 
-  buttonWrapper: {
-    alignItems: 'center'
+  input: {
+    height: 36,
+    borderColor: 'black',
+    margin: 4,
+    padding: 8,
+    borderWidth: 1,
+    borderRadius: 3,
+    fontSize: 18
   },
 
-  input: {
-    height: 40,
-    borderColor: 'black',
-    borderWidth: 1
+  buttonWrapper: {
+    alignItems: 'center'
   }
+
 })
