@@ -1,56 +1,41 @@
 var React = require('react-native');
+var pinFactory = require('./map-markers');
 import FloatingButton from '../common/floating-button';
 
 
 var {
   StyleSheet,
   MapView,
-  View,
-  Text
+  View
 } = React;
 
 
 module.exports = React.createClass({
 
-  getInitialState() {
+  getInitialState: function() {
     return {
-      isFirstLoad: true,
-      mapRegion: undefined,
       mapPins: [],
     };
   },
 
-  render() {
+  componentWillMount: function() {
+    
+    this.setState({
+      mapPins: this.getMapPins()
+    });
 
-    if (this.state.isFirstLoad) {
+  },
 
-      var updateMapPins = (region) => {
-        return [{
-          longitude: region.longitude,
-          latitude: region.latitude,
-          title: 'You Are Here',
-        }];
-      };
-
-      var onRegionChangeComplete = (region) => {
-        alert( "region:", region );
-        this.setState({
-          isFirstLoad: false,
-          annotations: updateMapPins(region)
-        });
-      };
-      
-    }
+  render: function() {
 
     return(
       <View style={ styles.container }>
         <MapView
           style={styles.map}
-          region={this.state.mapRegion}
           annotations={ this.state.mapPins }
-          showsUserLocation={true}
-          followUserLocation={true}
-          onRegionChangeComplete={ onRegionChangeComplete }
+          showsPointsOfInterest={ false }
+          showsUserLocation={ true }
+          followUserLocation={ true }
         />
         <FloatingButton
           onPress={ this.addActivity }
@@ -62,8 +47,21 @@ module.exports = React.createClass({
     );
   },
 
-  addActivity() {
+  getMapPins: function( region ) {
+    return [
+      pinFactory.createPin( this.showActivity )
+    ];
+  },
+
+  addActivity: function() {
     this.props.navigator.push( {name: 'camera'} );
+  },
+
+  showActivity: function() {
+    this.props.navigator.push({
+      name: 'activity',
+      passProps: { isNew: false }
+    });
   }
 
 })
