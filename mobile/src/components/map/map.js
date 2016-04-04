@@ -72,12 +72,12 @@ var styles = StyleSheet.create ({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    paddingTop: 30 // offset for wifi, time, battery etc. display
   },
 
   map: {
     flex: 1,
-    marginTop: 30 // offset for wifi, time, battery etc. display
   }
 
 });
