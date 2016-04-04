@@ -10,6 +10,10 @@ var  {
 
 // Hold off using ES6 'Component' instantiation pattern for now (lacks auto-binding and mix-ins)
 module.exports = React.createClass({
+
+  
+
+
   render: function(){
     return (
       
@@ -33,10 +37,10 @@ module.exports = React.createClass({
 
         console.log( "image data:", data );
 
-        // REPLACE existing view, passing flag to new view
+        // REPLACE existing view, relaying activity info. to new view
         this.props.navigator.replace({
           name: 'activity',
-          passProps: { isNew: true }
+          passProps: this.props.route.passProps
         });
 
       })

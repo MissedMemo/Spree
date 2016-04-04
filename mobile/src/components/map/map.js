@@ -54,13 +54,17 @@ module.exports = React.createClass({
   },
 
   addActivity: function() {
-    this.props.navigator.push( {name: 'camera'} );
+    var newActivity = { title: '', description: '' };
+    this.props.navigator.push({
+      name: 'camera',
+      passProps: { isNew: true, activity: newActivity }
+    });
   },
 
   showActivity: function( activity ) {
     this.props.navigator.push({
       name: 'activity',
-      passProps: { isNew: false, activity }
+      passProps: { isNew: false, activity: activity }
     });
   }
 

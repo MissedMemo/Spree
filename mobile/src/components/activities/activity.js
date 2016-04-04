@@ -11,10 +11,15 @@ var {
 
 module.exports = React.createClass({
 
+  getInitialState: function() {
+    return {
+      activity: this.props.route.passProps.activity
+    };
+  },
+
   render: function() {
 
     var isNew = this.props.route.passProps.isNew;
-    var activity = this.props.route.passProps.activity;
 
     return (
 
@@ -23,18 +28,18 @@ module.exports = React.createClass({
           source={ require('./demo-activity.jpg')}
         />
         <TextInput
-         style={ [styles.input, isNew ? styles.editable : null ] }
+         style={ [styles.input, { textAlign: 'center' }, isNew ? styles.editable : null ] }
          editable={ isNew }
          placeholder={ 'add a title...' }
-         value = { isNew ? '' : activity.title }
+         value = { this.state.activity.title }
         />
         <TextInput
-          style={ [ styles.input, { height: 90 }, isNew ? styles.editable : null ] } 
+          style={ [ styles.input, { flex: 3 }, isNew ? styles.editable : null ] } 
           multiline={true}
           maxLength={200}
           editable={ isNew }
           placeholder={'What makes this place so special?'}
-          value = { isNew ? '' : activity.description }
+          value = { this.state.activity.description }
         />
         <View style={styles.buttonWrapper}>
           <Button text={'Save'} onPress={ this.save }/>
@@ -55,7 +60,8 @@ var styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 30 // offset for wifi, time, battery etc. display
+    paddingTop: 30, // offset for wifi, time, battery etc. display
+    paddingBottom: 14
   },
 
   image: {
@@ -63,7 +69,7 @@ var styles = StyleSheet.create({
   },
 
   input: {
-    flex: 1,
+    flex: 0,
     margin: 4,
     padding: 8,
     fontSize: 18,
@@ -71,14 +77,13 @@ var styles = StyleSheet.create({
   },
 
   editable: {
-    flex: 3,
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 3
   },
 
   buttonWrapper: {
-    flex: 2,
+    flex: 0,
     alignItems: 'center'
   }
 
