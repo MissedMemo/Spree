@@ -13,21 +13,21 @@ module.exports = React.createClass({
 
   render: function() {
 
-    console.log( "props:", this.props.route.passProps );
+    var isNew = this.props.route.passProps.isNew;
 
     return (
 
       <View style={styles.container}>
         <TextInput
          style={styles.input}
-         editable={ this.props.route.passProps.IsNew }
+         editable={ isNew }
          placeholder={ 'add a title...' }
         />
         <TextInput
           style={ [ styles.input, {height: 90}] } 
           multiline={true}
           maxLength={200}
-          editable={ this.props.route.passProps.IsNew }
+          editable={ isNew }
           placeholder={'What makes this place so special?'}
         />
         <View style={styles.buttonWrapper}>
