@@ -1,5 +1,6 @@
 var React = require('react-native');
 var pinFactory = require('./map-markers');
+var api = require('../network/api');
 import FloatingButton from '../common/floating-button';
 
 
@@ -20,15 +21,22 @@ module.exports = React.createClass({
 
   componentWillMount: function() {
     
-    this.setState({
-      mapPins: this.getMapPins()
-    });
+    api.getNearbyActivities( region = null )
+      .then( function( activities ) {
+
+        this.setState({
+          mapPins: activities.map( (activity) => pinFactory.create( activity, this.showActivity ) )
+        });
+
+      }.bind(this));
 
   },
 
   render: function() {
 
-    return(
+    console.log( "markers:", this.state.mapPins );
+
+    return (
       <View style={ styles.container }>
         <MapView
           style={styles.map}
@@ -47,11 +55,27 @@ module.exports = React.createClass({
     );
   },
 
-  getMapPins: function( region ) {
-    return [
-      pinFactory.createPin( this.showActivity )
-    ];
+  /*
+  setMapPins: function( region ) {
+
+    api.getNearbyActivities( region )
+      .then( function( activities ) {
+
+        var pins = [];
+
+        activities.forEach( (activity) => {
+          var pin = pinFactory.create( activity, this.showActivity );
+          console.log( 'pin is:', pin );
+          pins.push( pin );
+        });
+
+        this.setState({
+          mapPins: pins;
+        });
+
+      }.bind(this));
   },
+  */
 
   addActivity: function() {
     var newActivity = { title: '', description: '' };
@@ -68,7 +92,7 @@ module.exports = React.createClass({
     });
   }
 
-})
+});
 
 
 var styles = StyleSheet.create ({

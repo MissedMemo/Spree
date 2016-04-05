@@ -9,12 +9,12 @@ var {
 
 module.exports = {
 
-  createPin: function( callback ) {
+  create: function( activity, callback ) {
     return {
-      longitude: -122.4046101306659,
-      latitude: 37.78151983393839,
+      longitude: activity.region.longitude,
+      latitude: activity.region.latitude,
       view:
-        <TouchableHighlight onPress={ ()=> callback( {title: 'Coolest XYZ Place', description: 'blah blah blah blah blah blah blah blah'} ) } >
+        <TouchableHighlight onPress={ ()=> callback( activity ) } >
           <Image style={ styles.image }  source={ require('./images/coffee.png') } />
         </TouchableHighlight>
     }
