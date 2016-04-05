@@ -15,7 +15,7 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      mapPins: [],
+      mapMarkers: [],
     };
   },
 
@@ -25,7 +25,7 @@ module.exports = React.createClass({
       .then( function( activities ) {
 
         this.setState({
-          mapPins: activities.map( (activity) => pinFactory.create( activity, this.showActivity ) )
+          mapMarkers: activities.map( (activity) => pinFactory.create( activity, this.showActivity ) )
         });
 
       }.bind(this));
@@ -34,13 +34,11 @@ module.exports = React.createClass({
 
   render: function() {
 
-    console.log( "markers:", this.state.mapPins );
-
     return (
       <View style={ styles.container }>
         <MapView
           style={styles.map}
-          annotations={ this.state.mapPins }
+          annotations={ this.state.mapMarkers }
           showsPointsOfInterest={ false }
           showsUserLocation={ true }
           followUserLocation={ true }
@@ -54,28 +52,6 @@ module.exports = React.createClass({
       </View>
     );
   },
-
-  /*
-  setMapPins: function( region ) {
-
-    api.getNearbyActivities( region )
-      .then( function( activities ) {
-
-        var pins = [];
-
-        activities.forEach( (activity) => {
-          var pin = pinFactory.create( activity, this.showActivity );
-          console.log( 'pin is:', pin );
-          pins.push( pin );
-        });
-
-        this.setState({
-          mapPins: pins;
-        });
-
-      }.bind(this));
-  },
-  */
 
   addActivity: function() {
     var newActivity = { title: '', description: '' };
