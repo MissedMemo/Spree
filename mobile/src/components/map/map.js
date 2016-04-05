@@ -44,7 +44,7 @@ module.exports = React.createClass({
           followUserLocation={ true }
         />
         <FloatingButton
-          onPress={ this.addActivity }
+          onPress={ this.startAddActivity }
           text='+'
           bkColor='#6e73ee'
           color='white'
@@ -53,12 +53,27 @@ module.exports = React.createClass({
     );
   },
 
-  addActivity: function() {
-    var newActivity = { title: '', description: '' };
+  startAddActivity: function() {
+
+    var newActivity = { title: '', description: '', region: {} };
+
     this.props.navigator.push({
       name: 'camera',
-      passProps: { isNew: true, activity: newActivity }
+      passProps: { isNew: true, initiateSave: this.endAddActivity, activity: newActivity }
     });
+  },
+
+  endAddActivity: function( newActivity ) {
+
+    console.log( 'saving new activity:', newActivity );
+
+    /*
+    navigator.geolocation.getCurrentPosition( location => {
+      newActivity.region.latitude = location.coords.latitude;
+      newActivity.region.longitude = location.coords.longitude;
+    });
+    */
+    
   },
 
   showActivity: function( activity ) {

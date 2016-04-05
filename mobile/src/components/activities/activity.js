@@ -14,7 +14,8 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      activity: this.props.route.passProps.activity
+      activity: this.props.route.passProps.activity,
+      initiateSave: this.props.route.passProps.initiateSave
     };
   },
 
@@ -60,6 +61,9 @@ module.exports = React.createClass({
 
   save: function() {
     this.props.navigator.popToTop();
+    if ( this.state.initiateSave ) {
+      this.state.initiateSave( this.state.activity );
+    }
   },
 
 });
