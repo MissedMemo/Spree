@@ -14,8 +14,7 @@ module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      activity: this.props.route.passProps.activity,
-      initiateSave: this.props.route.passProps.initiateSave
+      activity: this.props.route.passProps.activity
     };
   },
 
@@ -45,11 +44,14 @@ module.exports = React.createClass({
           onChangeText={ (text) => this.updateActivity({ description: text }) }
           value = { this.state.activity.description }
         />
-        <View style={styles.buttonWrapper}>
-          <Button text={'Save'} onPress={ this.save }/>
-        </View>
+        { isNew ? // only show 'save' button if this is a NEW activity
+            <View style={styles.buttonWrapper}>
+              <Button text={'Save'} onPress={ this.save }/>
+            </View>
+            : null
+        }
       </View> 
-    )
+    );
   },
 
   // setState replaces ENTIRE element (can't set properties etc.)
@@ -61,9 +63,7 @@ module.exports = React.createClass({
 
   save: function() {
     this.props.navigator.popToTop();
-    if ( this.state.initiateSave ) {
-      this.state.initiateSave( this.state.activity );
-    }
+    this.props.route.passProps.initiateSave( this.state.activity );
   },
 
 });
@@ -102,4 +102,4 @@ var styles = StyleSheet.create({
     alignItems: 'center'
   }
 
-})
+});
