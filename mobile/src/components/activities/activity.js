@@ -1,5 +1,6 @@
 var React = require('react-native');
 var Button = require('../common/button');
+var _ = require('underscore');
 
 var {
   StyleSheet,
@@ -30,8 +31,8 @@ module.exports = React.createClass({
         <TextInput
          style={ [styles.input, { textAlign: 'center' }, isNew ? styles.editable : null ] }
          editable={ isNew }
-         placeholder={ 'add a title...' }
-         onChangeText={ (text) => this.updateActivity( 'title', text ) }
+         placeholder={ 'Please add a title...' }
+         onChangeText={ (text) => this.updateActivity({ title: text }) }
          value = { this.state.activity.title }
         />
         <TextInput
@@ -39,8 +40,8 @@ module.exports = React.createClass({
           multiline={true}
           maxLength={200}
           editable={ isNew }
-          placeholder={'What makes this place so special?'}
-          onChangeText={ (text) => this.updateActivity( 'description', text ) }
+          placeholder={'Describe what makes this place so special...'}
+          onChangeText={ (text) => this.updateActivity({ description: text }) }
           value = { this.state.activity.description }
         />
         <View style={styles.buttonWrapper}>
@@ -51,25 +52,18 @@ module.exports = React.createClass({
   },
 
   // setState replaces ENTIRE element (can't set properties etc.)
-  updateActivity: function( key, value ) {
-    var temp = this.state.activity;
-    temp[key] = value;
-    this.setState({ activity: value });
+  updateActivity: function( newValue ) {
+    this.setState({
+      activity: _.extend( this.state.activity, newValue )
+    });
   },
 
   save: function() {
     this.props.navigator.popToTop();
   },
 
-})
+});
 
-/*
-{
- var temp = this.state.activity;
- temp.title = text;
- this.setState({ activity: temp });
-}}
-*/
 
 var styles = StyleSheet.create({
 
@@ -82,7 +76,7 @@ var styles = StyleSheet.create({
   },
 
   image: {
-    flex: 4,
+    flex: 6,
   },
 
   input: {
@@ -94,7 +88,7 @@ var styles = StyleSheet.create({
   },
 
   editable: {
-    borderColor: 'black',
+    borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 3
   },
