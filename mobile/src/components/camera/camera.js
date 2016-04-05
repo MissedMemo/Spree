@@ -11,9 +11,6 @@ var  {
 // Hold off using ES6 'Component' instantiation pattern for now (lacks auto-binding and mix-ins)
 module.exports = React.createClass({
 
-  
-
-
   render: function(){
     return (
       

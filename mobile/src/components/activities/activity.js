@@ -31,6 +31,7 @@ module.exports = React.createClass({
          style={ [styles.input, { textAlign: 'center' }, isNew ? styles.editable : null ] }
          editable={ isNew }
          placeholder={ 'add a title...' }
+         onChangeText={ (text) => this.updateActivity( 'title', text ) }
          value = { this.state.activity.title }
         />
         <TextInput
@@ -39,6 +40,7 @@ module.exports = React.createClass({
           maxLength={200}
           editable={ isNew }
           placeholder={'What makes this place so special?'}
+          onChangeText={ (text) => this.updateActivity( 'description', text ) }
           value = { this.state.activity.description }
         />
         <View style={styles.buttonWrapper}>
@@ -48,11 +50,26 @@ module.exports = React.createClass({
     )
   },
 
+  // setState replaces ENTIRE element (can't set properties etc.)
+  updateActivity: function( key, value ) {
+    var temp = this.state.activity;
+    temp[key] = value;
+    this.setState({ activity: value });
+  },
+
   save: function() {
     this.props.navigator.popToTop();
   },
 
 })
+
+/*
+{
+ var temp = this.state.activity;
+ temp.title = text;
+ this.setState({ activity: temp });
+}}
+*/
 
 var styles = StyleSheet.create({
 
