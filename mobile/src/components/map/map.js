@@ -65,14 +65,27 @@ module.exports = React.createClass({
 
   endAddActivity: function( newActivity ) {
 
-    console.log( 'saving new activity:', newActivity );
+    // geolocation call requires 'simulate location' to be active in XCode
+    // otherwise, we'll default to TGA location in Berkeley...
 
     /*
     navigator.geolocation.getCurrentPosition( location => {
-      newActivity.region.latitude = location.coords.latitude;
-      newActivity.region.longitude = location.coords.longitude;
+      if ( location ) {
+        newActivity.region.latitude = location.coords.latitude;
+        newActivity.region.longitude = location.coords.longitude;
+      } else {
+        newActivity.region.latitude = 37.7873589;
+        newActivity.region.longitude = -122.408227;
+      }
     });
     */
+
+    newActivity.region.latitude = 37.7873589;
+    newActivity.region.longitude = -122.408227;
+
+    this.setState({
+      mapMarkers: this.state.mapMarkers.concat( [ pinFactory.create( newActivity, this.showActivity ) ] )
+    });
     
   },
 
