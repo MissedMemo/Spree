@@ -1,6 +1,7 @@
 var React = require('react-native');
 var pinFactory = require('./map-markers');
 var api = require('../network/api');
+var Promise = require('bluebird');
 import FloatingButton from '../common/floating-button';
 
 
@@ -55,38 +56,21 @@ module.exports = React.createClass({
 
   startAddActivity: function() {
 
-    var newActivity = { title: '', description: '', region: {} };
+    this.createEmptyActivity()
+      .then( function( newActivity ) {
 
-    this.props.navigator.push({
-      name: 'camera',
-      passProps: { isNew: true, initiateSave: this.endAddActivity, activity: newActivity }
-    });
+        this.props.navigator.push({
+          name: 'camera',
+          passProps: { isNew: true, initiateSave: this.endAddActivity, activity: newActivity }
+        });
+
+      }.bind(this));
   },
 
   endAddActivity: function( newActivity ) {
-
-    // geolocation call requires 'simulate location' to be active in XCode
-    // otherwise, we'll default to TGA location in Berkeley...
-
-    /*
-    navigator.geolocation.getCurrentPosition( location => {
-      if ( location ) {
-        newActivity.region.latitude = location.coords.latitude;
-        newActivity.region.longitude = location.coords.longitude;
-      } else {
-        newActivity.region.latitude = 37.7873589;
-        newActivity.region.longitude = -122.408227;
-      }
-    });
-    */
-
-    newActivity.region.latitude = 37.7873589;
-    newActivity.region.longitude = -122.408227;
-
     this.setState({
       mapMarkers: this.state.mapMarkers.concat( [ pinFactory.create( newActivity, this.showActivity ) ] )
     });
-    
   },
 
   showActivity: function( activity ) {
@@ -94,6 +78,35 @@ module.exports = React.createClass({
       name: 'activity',
       passProps: { isNew: false, activity: activity }
     });
+  },
+
+  createEmptyActivity: function() {
+
+    return new Promise( function( fulfill, reject ) {
+
+      var newActivity = { title: '', description: '', region: {} };
+
+      // geolocation call requires 'simulate location' to be active in XCode
+      // otherwise, we'll default to TGA location in Berkeley...
+
+      navigator.geolocation.getCurrentPosition(
+        (location) => {
+          newActivity.region.latitude = location.coords.latitude;
+          newActivity.region.longitude = location.coords.longitude;
+          console.log('succeeded getting geo coords');
+          fulfill( newActivity );
+        },
+        (error) => {
+          newActivity.region.latitude = 37.7873589;
+          newActivity.region.longitude = -122.408227;
+          console.log('failed getting geo coords:', error.message );
+          fulfill( newActivity );
+        },
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      );
+
+    });
+
   }
 
 });
