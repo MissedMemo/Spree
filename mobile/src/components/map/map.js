@@ -68,9 +68,17 @@ module.exports = React.createClass({
   },
 
   endAddActivity: function( newActivity ) {
+    
+    // display new map pin right away
+
     this.setState({
       mapMarkers: this.state.mapMarkers.concat( [ pinFactory.create( newActivity, this.showActivity ) ] )
     });
+
+    // post to server -- assume server & Database operations will succeed (for now)
+
+    api.saveData( newActivity );
+
   },
 
   showActivity: function( activity ) {
