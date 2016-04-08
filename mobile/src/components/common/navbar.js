@@ -11,11 +11,11 @@ module.exports = React.createClass({
 
   render: function() {
 
-    var isMapView = this.props.navigator.getCurrentRoutes().length > 1;
+    var notMapView = this.props.navigator.getCurrentRoutes().length > 1;
 
     return (
       <View  style={ styles.navbar }>
-        { isMapView ?
+        { notMapView ?
           <Text style={ [styles.backButton, styles.headerText] } onPress={ this.back } >&lt;</Text>
           : null
         }

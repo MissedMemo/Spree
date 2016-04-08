@@ -32,8 +32,8 @@ var demoData = [
     'image' : 'http://someurl...',
     'category' : 'museum/gallery',
     'region' : {
-       longitude: -122.269195,
-       latitude: 37.877361
+      longitude: -122.269195,
+      latitude: 37.877361
     }
   },
 
@@ -43,8 +43,8 @@ var demoData = [
     'image' : 'http://someurl...',
     'category' : 'groceries',
     'region' : {
-       longitude: -122.269948,
-       latitude: 37.878923
+      longitude: -122.269948,
+      latitude: 37.878923
     }
   },
 
@@ -54,8 +54,8 @@ var demoData = [
     'image' : 'http://someurl...',
     'category' : 'restaurant',
     'region' : {
-       longitude: -122.268963,
-       latitude: 37.879590
+      longitude: -122.268963,
+      latitude: 37.879590
     }
   },
 
@@ -65,8 +65,8 @@ var demoData = [
     'image' : 'http://someurl...',
     'category' : 'books',
     'region' : {
-       longitude: -122.268875,
-       latitude: 37.880460
+      longitude: -122.268875,
+      latitude: 37.880460
     }
   },
 
@@ -76,8 +76,8 @@ var demoData = [
     'image' : 'http://someurl...',
     'category' : 'restaurant',
     'region' : {
-       longitude: -122.269528,
-       latitude: 37.879975
+      longitude: -122.269528,
+      latitude: 37.879975
     }
   },
 
@@ -87,8 +87,8 @@ var demoData = [
     'image' : 'http://someurl...',
     'category' : 'hotel',
     'region' : {
-       longitude: -122.269355,
-       latitude: 37.879590
+      longitude: -122.269355,
+      latitude: 37.879590
     }
   },
 
@@ -98,8 +98,8 @@ var demoData = [
     'image' : 'http://someurl...',
     'category' : 'garden',
     'region' : {
-        longitude: -122.26940,
-        latitude: 37.88765
+      longitude: -122.262901,
+      latitude: 37.885296
     }
   },
 
