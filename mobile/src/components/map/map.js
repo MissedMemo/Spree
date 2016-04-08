@@ -92,7 +92,13 @@ module.exports = React.createClass({
 
     return new Promise( function( fulfill, reject ) {
 
-      var newActivity = { title: '', description: '', region: {} };
+      var newActivity = {
+        title: '',
+        description: '',
+        image: '',
+        category: '',
+        region: {}
+      };
 
       // geolocation call requires 'simulate location' to be active in XCode
       // otherwise, we'll default to TGA location in Berkeley...

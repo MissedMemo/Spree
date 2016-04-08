@@ -34,12 +34,7 @@ app.get('*', function (req, res) {
 
 app.post( '/api/activities/new', function(req,res) {
   
-  var postedActivity = req.body.activity;
-  console.log('received posted data:', postedActivity );
-
-  var activity = new Activity( req.body.activity );
-
-  activity.save( function (err) {
+  Activity.create( req.body.activity, function (err) {
     if ( err )
       console.log( "error saving new activity:", err );
     else
