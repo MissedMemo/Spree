@@ -105,14 +105,14 @@ module.exports = React.createClass({
 
       navigator.geolocation.getCurrentPosition(
         (location) => {
-          newActivity.region.latitude = location.coords.latitude;
           newActivity.region.longitude = location.coords.longitude;
+          newActivity.region.latitude = location.coords.latitude;
           console.log('succeeded getting geo coords');
           fulfill( newActivity );
         },
         (error) => {
-          newActivity.region.latitude = 37.7873589;
           newActivity.region.longitude = -122.408227;
+          newActivity.region.latitude = 37.7873589;
           console.log('failed getting geo coords:', error.message );
           fulfill( newActivity );
         },

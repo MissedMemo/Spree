@@ -11,8 +11,6 @@ module.exports = {
 
   create: function( activity, callback ) {
 
-    console.log( 'creating pin for activity:', activity );
-
     return {
       longitude: activity.region.longitude,
       latitude: activity.region.latitude,
